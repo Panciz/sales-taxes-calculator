@@ -1,11 +1,13 @@
 package org.dpoletti.sales_taxes_calc;
 
+import java.math.BigDecimal;
+
 public class Item {
 
 	private String name;
-	private double price;
+	private BigDecimal price;
 	
-	public Item(String name, double price) {
+	public Item(String name, BigDecimal price) {
 		super();
 		this.name = name;
 		this.price = price;
@@ -15,12 +17,12 @@ public class Item {
 		return name;
 	}
 
-	public double getPrice() {
+	public BigDecimal getPrice() {
 		return price;
 	}
 	
-	public double getTaxAmount(){
-		return 0;
+	public BigDecimal getTaxAmount(){
+		return new BigDecimal("0");
 		
 	}
 	

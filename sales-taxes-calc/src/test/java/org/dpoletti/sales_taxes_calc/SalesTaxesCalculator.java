@@ -17,26 +17,26 @@ public class SalesTaxesCalculator{
 	@Test
 	public void roundToTheNearestCents(){
 		BigDecimal amount = new  BigDecimal("1.99");
-		Assert.assertEquals(CalculatorUtils.roundToNearest(amount).toString(),"2.00");
+		Assert.assertEquals("2.00",CalculatorUtils.roundToNearest(amount).toString());
 		 amount = new  BigDecimal("1.999");
-		Assert.assertEquals(CalculatorUtils.roundToNearest(amount).toString(),"2.00");
+		Assert.assertEquals("2.00",CalculatorUtils.roundToNearest(amount).toString());
 		
 		 amount = new  BigDecimal("1.4566");
-		Assert.assertEquals(CalculatorUtils.roundToNearest(amount).toString(),"1.50");
+		Assert.assertEquals("1.50",CalculatorUtils.roundToNearest(amount).toString());
 		 amount = new  BigDecimal("100.223223");
-		Assert.assertEquals(CalculatorUtils.roundToNearest(amount).toString(),"100.25");
+		Assert.assertEquals("100.25",CalculatorUtils.roundToNearest(amount).toString());
 
 		 amount = new  BigDecimal("0.01");
-		Assert.assertEquals(CalculatorUtils.roundToNearest(amount).toString(),"0.05");
+		Assert.assertEquals("0.05",CalculatorUtils.roundToNearest(amount).toString());
 
 	}
 	
 	@Test
 	public void calculateTaxes(){
-		Item noTaxItem = new Item("book",12.49d);
-		Assert.assertEquals("Error calculating taxes for "+noTaxItem,noTaxItem.getTaxAmount(), 0,0);
-		Item nomalTax = new Item("music CD",14.99d);
-		Assert.assertEquals("Error calculating taxes for "+noTaxItem,noTaxItem.getTaxAmount(), 1.5,0);
+		Item noTaxItem = new Item("book",new BigDecimal("12.49"));
+		Assert.assertEquals("Error calculating taxes for "+noTaxItem,new BigDecimal("0"),noTaxItem.getTaxAmount() );
+		Item nomalTax = new Item("music CD",new BigDecimal("14.99"));
+		Assert.assertEquals("Error calculating taxes for "+noTaxItem,new BigDecimal("1.5"),noTaxItem.getTaxAmount() );
 
 	}
 	
