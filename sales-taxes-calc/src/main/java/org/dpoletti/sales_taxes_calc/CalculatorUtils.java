@@ -14,7 +14,7 @@ public class CalculatorUtils {
 		bd=bd.setScale(2,BigDecimal.ROUND_HALF_UP);
 		BigDecimal divisor = new BigDecimal("20").setScale(0);
 		
-		BigDecimal result = ((bd.multiply(divisor)).setScale(0,RoundingMode.HALF_UP)).divide(divisor);
+		BigDecimal result = ((bd.multiply(divisor)).setScale(0,RoundingMode.UP)).divide(divisor);
 	    return result.setScale(2,RoundingMode.HALF_UP);
 	}
 }

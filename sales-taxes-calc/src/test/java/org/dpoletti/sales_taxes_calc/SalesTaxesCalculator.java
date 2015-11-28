@@ -22,12 +22,12 @@ public class SalesTaxesCalculator{
 		Assert.assertEquals(CalculatorUtils.roundToNearest(amount).toString(),"2.00");
 		
 		 amount = new  BigDecimal("1.4566");
-		Assert.assertEquals(CalculatorUtils.roundToNearest(amount).toString(),"1.45");
+		Assert.assertEquals(CalculatorUtils.roundToNearest(amount).toString(),"1.50");
 		 amount = new  BigDecimal("100.223223");
 		Assert.assertEquals(CalculatorUtils.roundToNearest(amount).toString(),"100.25");
 
 		 amount = new  BigDecimal("0.01");
-		Assert.assertEquals(CalculatorUtils.roundToNearest(amount).toString(),"0.00");
+		Assert.assertEquals(CalculatorUtils.roundToNearest(amount).toString(),"0.05");
 
 	}
 	
