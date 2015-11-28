@@ -7,10 +7,28 @@ public class SalesTaxesCalculator{
 	
 	
 	@Test
-	public void applyTaxes(){
-		Item noTaxItem = new Item("book",12.49d);
-		Assert.assertEquals("Error calculating taxes for "+noTaxItem,noTaxItem.getTaxAmount(), 12.49,0);
+	public void parseInput(){
+		
 		
 	}
+	
+	
+	@Test
+	public void calculateTaxes(){
+		Item noTaxItem = new Item("book",12.49d);
+		Assert.assertEquals("Error calculating taxes for "+noTaxItem,noTaxItem.getTaxAmount(), 0,0);
+		
+	}
+	
+	public void calculateBasketTotal(){
+		
+		
+	}
+	
+	public void printOutPut(){
+		
+	}
+	
+	
 	
 }
