@@ -42,8 +42,12 @@ public class ProductListParser {
 	
 	public static String extractTypeName(String name){
 		String result=name;
-		for(String packageName:PACKAGE_NAMES){
-			result=result.replace(packageName, "");
+		result=result.replace(IMPORTED_MARK, "");
+		result=result.trim();
+		for(String packagingTypeName:PACKAGE_NAMES){
+			if(result.startsWith(packagingTypeName)){
+				result=result.replace(packagingTypeName,"");
+			}
 		}
 		return result.trim();
 	}

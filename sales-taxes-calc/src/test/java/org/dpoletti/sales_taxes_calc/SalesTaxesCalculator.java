@@ -4,7 +4,6 @@ import java.math.BigDecimal;
 
 import org.dpoletti.sales_taxes_calc.catalog.FileProductCatalog;
 import org.dpoletti.sales_taxes_calc.io.ProductListParser;
-import org.dpoletti.sales_taxes_calc.io.ProductParserException;
 import org.dpoletti.sales_taxes_calc.model.Item;
 import org.dpoletti.sales_taxes_calc.model.ItemType;
 import org.dpoletti.sales_taxes_calc.utils.CalculatorUtils;
@@ -75,6 +74,7 @@ public class SalesTaxesCalculator{
 		Assert.assertEquals("Error getting item type",ItemType.FOOD,catalog.getItemType(packetCocholate));
 	}
 	
+
 	
 	
 }
