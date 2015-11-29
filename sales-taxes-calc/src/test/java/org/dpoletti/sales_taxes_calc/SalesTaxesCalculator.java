@@ -68,6 +68,8 @@ public class SalesTaxesCalculator{
 		Assert.assertEquals("Error getting item type",ItemType.UNKNOWN,catalog.getItemType(unknownItem));
 		Item book = new Item("book",new BigDecimal("10.12"));
 		Assert.assertEquals("Error getting item type",ItemType.BOOK,catalog.getItemType(book));
+		Item musicCd = new Item("headache pills",new BigDecimal("10.12"));
+		Assert.assertEquals("Error getting item type",ItemType.MEDICAL_PRODUCT,catalog.getItemType(musicCd));
 	}
 	
 	
