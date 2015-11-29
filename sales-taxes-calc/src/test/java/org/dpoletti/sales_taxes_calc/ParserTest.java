@@ -21,7 +21,7 @@ public class ParserTest {
 		Assert.assertEquals("Error parsing line name mistmatch ",itemExpeted.getName(),parsedItem.getName());
 		Assert.assertEquals("Error parsing line price mistmatch ",itemExpeted.getPrice(),parsedItem.getPrice());
 		Assert.assertEquals("Error parsing line package type","",parsedItem.getPackageType());
-		Assert.assertFalse("Error parsing line imported flag",parsedItem.getIsImported());	
+		Assert.assertFalse("Error parsing line imported flag",parsedItem.isImported());	
 		
 		 inputLine = "1 book ";
 		 itemExpeted = new Item("book", new  BigDecimal("0.0"));
@@ -29,7 +29,7 @@ public class ParserTest {
 		Assert.assertEquals("Error parsing line name mistmatch ",itemExpeted.getName(),parsedItem.getName());
 		Assert.assertEquals("Error parsing line price mistmatch ",itemExpeted.getPrice(),parsedItem.getPrice());
 		Assert.assertEquals("Error parsing line package type","",parsedItem.getPackageType());
-		Assert.assertFalse("Error parsing line imported flag",parsedItem.getIsImported());	
+		Assert.assertFalse("Error parsing line imported flag",parsedItem.isImported());	
 		
 		 inputLine = "   10 book at 122.2";
 		itemExpeted = new Item("book", new  BigDecimal("122.20"));
@@ -37,7 +37,7 @@ public class ParserTest {
 		Assert.assertEquals("Error parsing line name mistmatch ",itemExpeted.getName(),parsedItem.getName());
 		Assert.assertEquals("Error parsing line price mistmatch ",itemExpeted.getPrice(),parsedItem.getPrice());
 		Assert.assertEquals("Error parsing line package type","",parsedItem.getPackageType());
-		Assert.assertFalse("Error parsing line imported flag",parsedItem.getIsImported());	
+		Assert.assertFalse("Error parsing line imported flag",parsedItem.isImported());	
 		
 		inputLine = "   10 music CD at 122.2";
 		itemExpeted = new Item("music CD", new  BigDecimal("122.20"));
@@ -45,7 +45,7 @@ public class ParserTest {
 		Assert.assertEquals("Error parsing line name mistmatch ",itemExpeted.getName(),parsedItem.getName());
 		Assert.assertEquals("Error parsing line price mistmatch ",itemExpeted.getPrice(),parsedItem.getPrice());
 		Assert.assertEquals("Error parsing line package type","",parsedItem.getPackageType());
-		Assert.assertFalse("Error parsing line imported flag",parsedItem.getIsImported());		
+		Assert.assertFalse("Error parsing line imported flag",parsedItem.isImported());		
 		
 		inputLine = "   10 imported bottle of perfume at 122.2";
 		itemExpeted = new Item("perfume", new  BigDecimal("122.20"));
@@ -53,7 +53,7 @@ public class ParserTest {
 		Assert.assertEquals("Error parsing line name mistmatch ",itemExpeted.getName(),parsedItem.getName());
 		Assert.assertEquals("Error parsing line price mistmatch ",itemExpeted.getPrice(),parsedItem.getPrice());
 		Assert.assertEquals("Error parsing line package type","bottle of",parsedItem.getPackageType());
-		Assert.assertTrue("Error parsing line imported flag",parsedItem.getIsImported());
+		Assert.assertTrue("Error parsing line imported flag",parsedItem.isImported());
 	}
 	
 	@Test(expected=ProductParserException.class)
