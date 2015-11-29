@@ -14,13 +14,11 @@ import org.dpoletti.sales_taxes_calc.model.Item;
  *
  */
 public class ProductListParser { 
-	public static final Pattern ITEM_QUANTITY_PATTERN =  Pattern.compile("[0-9]+\\s+(\\S.+)");
+	
+	public static final Pattern ITEM_QUANTITY_PATTERN =  
+			//<quantity> [imported] [packageType] <productName>
+			Pattern.compile("[0-9]+\\s+(imported\\s+|[\\S]+\\s+of\\s+)?(imported\\s+|[\\S]+\\s+of\\s+)?(\\S.+)");
 	public static final String ITEM_PRICE_SEPARATOR = " at ";
-	public static final String[] PACKAGE_NAMES = new String[]{
-		"bottle of",
-		"box of",
-		"packet of"
-	};
 	public static final String IMPORTED_MARK = "imported"; 
 	
 	/**
@@ -32,27 +30,35 @@ public class ProductListParser {
 	 */
 	private Item parseItemqt(String itemQtToken) throws ProductParserException{
 		Matcher m = ITEM_QUANTITY_PATTERN.matcher(itemQtToken);
-		if(m.matches() && m.groupCount()>0){
-			Item result = new Item(m.group(1), new BigDecimal("0.0"));
+		if(m.matches()){
+			Item result = new Item(m.group(3), new BigDecimal("0.0"));
+			extractGroup(m,result,1);
+			extractGroup(m,result,2);
 			return result;
 		}else{
 			throw new ProductParserException("Error parsing  : "+itemQtToken+" not a valid item quantity line");
 		}
 	}
 	
-	public static String extractTypeName(String name){
-		String result=name;
-		result=result.replace(IMPORTED_MARK, "");
-		result=result.trim();
-		for(String packagingTypeName:PACKAGE_NAMES){
-			if(result.startsWith(packagingTypeName)){
-				result=result.replace(packagingTypeName,"");
+	private void extractGroup(Matcher matcher,Item item,int groupId){
+		if(matcher.group(groupId)!=null){
+			if(IMPORTED_MARK.equals(matcher.group(groupId).trim())){
+				item.setImported(true);
+			}else{
+				item.setPackageType(matcher.group(groupId).trim());
 			}
 		}
-		return result.trim();
 	}
 	
 	
+	/**
+	 * Parse a line and extract the Item quantity,name 
+	 * 
+	 * 
+	 * @param line
+	 * @return
+	 * @throws ProductParserException
+	 */
 	public Item parseLine(String line) throws ProductParserException{
 		if(line==null){
 			return null;
@@ -83,5 +89,8 @@ public class ProductListParser {
 		return item;
 		
 	}
+
+
+
 	
 }

@@ -47,7 +47,7 @@ public class ParserTest {
 		Assert.assertEquals("Error parsing line package type","",parsedItem.getPackageType());
 		Assert.assertFalse("Error parsing line imported flag",parsedItem.isImported());		
 		
-		inputLine = "   10 imported bottle of perfume at 122.2";
+		inputLine = "10 imported bottle of perfume at 122.2";
 		itemExpeted = new Item("perfume", new  BigDecimal("122.20"));
 		parsedItem = parser.parseLine(inputLine);
 		Assert.assertEquals("Error parsing line name mistmatch ",itemExpeted.getName(),parsedItem.getName());

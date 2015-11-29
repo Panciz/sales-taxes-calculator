@@ -54,7 +54,7 @@ public class FileProductCatalog implements ProductCatalog {
 		}
 		if(item.getName()==null)
 			return ItemType.UNKNOWN;
-		String type = catalogFile.getProperty(ProductListParser.extractTypeName(item.getName().toLowerCase()),ItemType.UNKNOWN.getValue());
+		String type = catalogFile.getProperty(item.getName().toLowerCase(),ItemType.UNKNOWN.getValue());
 		return ItemType.fromString(type);
 	}
 
