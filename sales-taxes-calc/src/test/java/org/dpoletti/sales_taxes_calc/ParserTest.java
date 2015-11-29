@@ -56,22 +56,16 @@ public class ParserTest {
 	
 	@Test
 	public void testIsImportedCheck(){
-		Item unknownItem = new Item("spaceShuttle",new BigDecimal("1000000000000"));
-		Assert.assertFalse(parser.isImported(unknownItem));
-		Item imported = new Item("imported box of wine",new BigDecimal("1000000000000"));
-		Assert.assertFalse(parser.isImported(unknownItem));
-		 imported = new Item("imported food",new BigDecimal("1000000000000"));
-		Assert.assertTrue(parser.isImported(unknownItem));
+		Assert.assertFalse(parser.isImported("spaceShuttle"));
+		Assert.assertFalse(parser.isImported("imported box of wine"));
+		Assert.assertTrue(parser.isImported("imported food"));
 	}
 	
 	@Test
 	public void testExtractPackageName(){
-		Item unknownItem = new Item("spaceShuttle",new BigDecimal("1000000000000"));
-		Assert.assertEquals("Error extacting package name","",parser.getPackageType(unknownItem));
-		Item boxItem = new Item("imported box of wine",new BigDecimal("2.23"));
-		Assert.assertEquals("Error extacting package name","box of",parser.getPackageType(boxItem));
-		Item packageItem = new Item("packet of cookies",new BigDecimal("2"));
-			Assert.assertEquals("Error extacting package name","packet of",parser.getPackageType(packageItem));
+		Assert.assertEquals("Error extacting package name","",parser.getPackageType("spaceShuttle"));
+		Assert.assertEquals("Error extacting package name","box of",parser.getPackageType("imported box of wine"));
+			Assert.assertEquals("Error extacting package name","packet of",parser.getPackageType("packet of cookies"));
 		
 		
 	}
