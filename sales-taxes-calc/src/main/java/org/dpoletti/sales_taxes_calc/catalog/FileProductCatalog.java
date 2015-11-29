@@ -6,8 +6,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
 
-import javax.management.RuntimeErrorException;
-
+import org.dpoletti.sales_taxes_calc.io.ProductListParser;
 import org.dpoletti.sales_taxes_calc.model.Item;
 import org.dpoletti.sales_taxes_calc.model.ItemType;
 
@@ -53,7 +52,9 @@ public class FileProductCatalog implements ProductCatalog {
 		if(this.catalogFile==null){
 			throw new RuntimeException("File Catalog must be initialezed");
 		}
-		String type = catalogFile.getProperty(item.getName(),ItemType.UNKNOWN.getValue());
+		if(item.getName()==null)
+			return ItemType.UNKNOWN;
+		String type = catalogFile.getProperty(ProductListParser.extractTypeName(item.getName().toLowerCase()),ItemType.UNKNOWN.getValue());
 		return ItemType.fromString(type);
 	}
 

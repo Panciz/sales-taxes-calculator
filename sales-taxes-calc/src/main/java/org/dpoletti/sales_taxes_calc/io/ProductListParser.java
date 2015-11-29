@@ -16,8 +16,12 @@ import org.dpoletti.sales_taxes_calc.model.Item;
 public class ProductListParser { 
 	public static final Pattern ITEM_QUANTITY_PATTERN =  Pattern.compile("[0-9]+\\s+(\\S.+)");
 	public static final String ITEM_PRICE_SEPARATOR = " at ";
-	
-	
+	public static final String[] PACKAGE_NAMES = new String[]{
+		"bottle of",
+		"box of",
+		"packet of"
+	};
+	public static final String IMPORTED_MARK = "imported"; 
 	
 	/**
 	 * Extract quantity and item name and creates the Item OB 
@@ -36,7 +40,13 @@ public class ProductListParser {
 		}
 	}
 	
-	
+	public static String extractTypeName(String name){
+		String result=name;
+		for(String packageName:PACKAGE_NAMES){
+			result=result.replace(packageName, "");
+		}
+		return result.trim();
+	}
 	
 	
 	public Item parseLine(String line) throws ProductParserException{
