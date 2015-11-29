@@ -1,4 +1,4 @@
-package org.dpoletti.sales_taxes_calc;
+package org.dpoletti.sales_taxes_calc.model;
 
 import java.math.BigDecimal;
 

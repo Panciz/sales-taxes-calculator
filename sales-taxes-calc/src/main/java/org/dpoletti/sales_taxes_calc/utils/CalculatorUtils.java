@@ -1,4 +1,4 @@
-package org.dpoletti.sales_taxes_calc;
+package org.dpoletti.sales_taxes_calc.utils;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
