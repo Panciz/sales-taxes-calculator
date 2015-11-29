@@ -3,6 +3,7 @@ package org.dpoletti.sales_taxes_calc;
 import java.math.BigDecimal;
 
 import org.dpoletti.sales_taxes_calc.catalog.FileProductCatalog;
+import org.dpoletti.sales_taxes_calc.io.ProductListParser;
 import org.dpoletti.sales_taxes_calc.model.Item;
 import org.dpoletti.sales_taxes_calc.model.ItemType;
 import org.dpoletti.sales_taxes_calc.utils.CalculatorUtils;
@@ -14,6 +15,7 @@ public class SalesTaxesCalculator{
 	
 	public final static String CATALOG_FILE_NAME="src/test/resources/catalog.properties";
 	public static FileProductCatalog catalog = new FileProductCatalog(CATALOG_FILE_NAME);
+	public static ProductListParser parser= new ProductListParser();
 	
 	@BeforeClass
 	public static void initCatalgo() throws Exception{
@@ -22,7 +24,12 @@ public class SalesTaxesCalculator{
 	
 	@Test
 	public void parseInput(){
+		String inputLine = "1 book at 12.49 ";
+		Item itemExpeted = new Item("book", new  BigDecimal("12.49"));
+		itemExpeted=parser.parseLine(inputLine);
 		
+		Assert.assertEquals("Error parsing line name mistmatch ",itemExpeted.getName(),parser.parseLine(inputLine).getName());
+
 		
 	}
 	
