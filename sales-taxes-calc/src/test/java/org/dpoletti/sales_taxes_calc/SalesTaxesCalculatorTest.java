@@ -56,7 +56,7 @@ public class SalesTaxesCalculatorTest{
 		Item onlyImportDuty= new Item("book",new BigDecimal("10.00"),"",true);
 		Assert.assertEquals("Error calculating taxes for "+onlyImportDuty,new BigDecimal("0.50"),onlyImportDuty.getTaxAmount() );
 		Item onlyImportDuty2= new Item("book",new BigDecimal("20.10"),"",true);
-		Assert.assertEquals("Error calculating taxes for "+onlyImportDuty2,new BigDecimal("2.50"),onlyImportDuty2.getTaxAmount() );
+		Assert.assertEquals("Error calculating taxes for "+onlyImportDuty2,new BigDecimal("1.50"),onlyImportDuty2.getTaxAmount() );
 	
 		Item importNormalDuty= new Item("perfume",new BigDecimal("27.99"),"",true);
 		Assert.assertEquals("Error calculating taxes for "+importNormalDuty,new BigDecimal("4.80"),importNormalDuty.getTaxAmount() );
