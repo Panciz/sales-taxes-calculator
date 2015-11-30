@@ -3,6 +3,7 @@ package org.dpoletti.sales_taxes_calc;
 import java.math.BigDecimal;
 
 import org.dpoletti.sales_taxes_calc.catalog.FileProductCatalog;
+import org.dpoletti.sales_taxes_calc.catalog.SalesTaxesCalculator;
 import org.dpoletti.sales_taxes_calc.io.ProductListParser;
 import org.dpoletti.sales_taxes_calc.model.Item;
 import org.dpoletti.sales_taxes_calc.model.ItemType;
@@ -11,7 +12,7 @@ import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-public class SalesTaxesCalculator{
+public class SalesTaxesCalculatorTest{
 	
 	public final static String CATALOG_FILE_NAME="src/test/resources/catalog.properties";
 	public static FileProductCatalog catalog = new FileProductCatalog(CATALOG_FILE_NAME);
@@ -20,6 +21,7 @@ public class SalesTaxesCalculator{
 	@BeforeClass
 	public static void initCatalgo() throws Exception{
 		catalog.initialize();
+		SalesTaxesCalculator.productCatalog=catalog;
 	}
 	
 	

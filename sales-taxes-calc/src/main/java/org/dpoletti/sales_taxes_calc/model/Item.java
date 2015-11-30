@@ -2,7 +2,11 @@ package org.dpoletti.sales_taxes_calc.model;
 
 import java.math.BigDecimal;
 
+import org.dpoletti.sales_taxes_calc.catalog.SalesTaxesCalculator;
+import org.dpoletti.sales_taxes_calc.utils.CalculatorUtils;
+
 public class Item {
+
 
 	@Override
 	public String toString() {
@@ -14,6 +18,7 @@ public class Item {
 	private String packageType= "";
 	private boolean imported = false;
 	private BigDecimal taxAmount = null;
+	private ItemType type;
 
 	public boolean isImported() {
 		return imported;
@@ -34,6 +39,7 @@ public class Item {
 	public Item(String name, BigDecimal price) {
 		super();
 		this.name = name;
+		
 		this.price = price;
 	}
 
@@ -48,9 +54,14 @@ public class Item {
 	
 	public BigDecimal getTaxAmount(){
 		if(this.taxAmount==null){
+			// the STANRDA_DUTY_RATE% of the price Rounded to nerest 0.05
+			this.taxAmount=
+					CalculatorUtils.roundToNearest(
+							(this.getPrice().multiply(this.type.getStandardDutyRate()))
+							.divide(new BigDecimal("100")));
 			
 		}
-		return new BigDecimal("0");
+		return this.taxAmount;
 	}
 
 	public void setPrice(BigDecimal price) {

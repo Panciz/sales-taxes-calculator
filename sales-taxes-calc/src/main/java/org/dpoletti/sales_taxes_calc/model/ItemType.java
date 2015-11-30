@@ -2,15 +2,18 @@ package org.dpoletti.sales_taxes_calc.model;
 
 import java.math.BigDecimal;
 
+import org.dpoletti.sales_taxes_calc.catalog.SalesTaxesCalculator;
+
 public enum ItemType {
 	
 
-	FOOD(new BigDecimal("0").setScale(2)), 
-	MEDICAL_PRODUCT(new BigDecimal("0").setScale(2)),
-	BOOK(new BigDecimal("0").setScale(2)),
-	OTHER(new BigDecimal("10.00").setScale(2));
+	
+	FOOD(SalesTaxesCalculator.NO_DUTY_RATE), 
+	MEDICAL_PRODUCT(SalesTaxesCalculator.NO_DUTY_RATE),
+	BOOK(SalesTaxesCalculator.NO_DUTY_RATE),
+	OTHER(SalesTaxesCalculator.STANDARD_DUTY_RATE);
 
-	public static final BigDecimal IMPORTED_DURY_RATE=new BigDecimal("5.00").setScale(2);
+
 
 	private ItemType(BigDecimal value) {
 		this.standardDutyRate = value;
