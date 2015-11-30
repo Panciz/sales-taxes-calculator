@@ -58,10 +58,17 @@ public class Item {
 	public BigDecimal getTaxAmount(){
 		if(this.taxAmount==null){
 			// the STANRDA_DUTY_RATE% of the price Rounded to nerest 0.05
-			this.taxAmount=
-					CalculatorUtils.roundToNearest(
-							(this.price.multiply(this.getType().getStandardDutyRate()))
-							.divide(new BigDecimal("100")));
+			BigDecimal standardDuty = CalculatorUtils.roundToNearest(
+					(this.price.multiply(this.getType().getStandardDutyRate()))
+					.divide(new BigDecimal("100")));
+			BigDecimal importedDuty = new BigDecimal("0.00");
+			if(this.isImported()){
+				importedDuty=CalculatorUtils.roundToNearest(
+						(this.price.multiply(SalesTaxesCalculator.IMPORTED_DUTY_RATE))
+						.divide(new BigDecimal("100")));
+			}
+			
+			this.taxAmount=standardDuty.add(importedDuty);
 			
 		}
 		return this.taxAmount;
