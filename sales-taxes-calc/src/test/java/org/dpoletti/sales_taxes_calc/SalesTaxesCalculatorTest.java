@@ -46,10 +46,10 @@ public class SalesTaxesCalculatorTest{
 	
 	@Test
 	public void calculateTaxes(){
-		Item noTaxItem = new Item("book",new BigDecimal("12.49"));
-		Assert.assertEquals("Error calculating taxes for "+noTaxItem,new BigDecimal("0"),noTaxItem.getTaxAmount() );
-		Item nomalTax = new Item("music CD",new BigDecimal("14.99"));
-		Assert.assertEquals("Error calculating taxes for "+nomalTax,new BigDecimal("1.5"),nomalTax.getTaxAmount() );
+		Item noTaxItem = new Item("book",new BigDecimal("12.49"),"",false);
+		Assert.assertEquals("Error calculating taxes for "+noTaxItem,new BigDecimal("0.00"),noTaxItem.getTaxAmount() );
+		Item nomalTax = new Item("music CD",new BigDecimal("14.99"),"",false);
+		Assert.assertEquals("Error calculating taxes for "+nomalTax,new BigDecimal("1.50"),nomalTax.getTaxAmount() );
 
 	}
 	@Test
@@ -64,13 +64,13 @@ public class SalesTaxesCalculatorTest{
 	
 	@Test
 	public void testFileCatalog(){
-		Item unknownItem = new Item("spaceShuttle",new BigDecimal("1000000000000"));
+		Item unknownItem = new Item("spaceShuttle",new BigDecimal("1000000000000"),"",false);
 		Assert.assertEquals("Error getting item type",ItemType.OTHER,catalog.getItemType(unknownItem));
-		Item book = new Item("book",new BigDecimal("10.12"));
+		Item book = new Item("book",new BigDecimal("10.12"),"",false);
 		Assert.assertEquals("Error getting item type",ItemType.BOOK,catalog.getItemType(book));
-		Item pills = new Item("headache pills",new BigDecimal("10.12"));
+		Item pills = new Item("headache pills",new BigDecimal("10.12"),"",false);
 		Assert.assertEquals("Error getting item type",ItemType.MEDICAL_PRODUCT,catalog.getItemType(pills));
-		Item packetCocholate = new Item("chocolate bar",new BigDecimal("10.12"));
+		Item packetCocholate = new Item("chocolate bar",new BigDecimal("10.12"),"",false);
 		Assert.assertEquals("Error getting item type",ItemType.FOOD,catalog.getItemType(packetCocholate));
 	}
 	

@@ -12,7 +12,6 @@ public class Item {
 	public String toString() {
 		return null;
 	}
-
 	private String name;
 	private BigDecimal price;
 	private String packageType= "";
@@ -24,50 +23,48 @@ public class Item {
 		return imported;
 	}
 
-	public void setImported(boolean imported) {
-		this.imported = imported;
+
+	public BigDecimal getPrice() {
+		return price;
 	}
+
 
 	public String getPackageType() {
 		return packageType;
 	}
 
-	public void setPackageType(String packageType) {
-		this.packageType = packageType;
-	}
 
-	public Item(String name, BigDecimal price) {
+	public Item(String name, BigDecimal price,String packageType,boolean imported) {
 		super();
 		this.name = name;
-		
 		this.price = price;
+		this.packageType = packageType;
+		this.imported=imported;
 	}
 
+
+	public ItemType getType() {
+		if(this.type==null){
+			this.type=SalesTaxesCalculator.productCatalog.getItemType(this);
+		}
+		return type;
+	}
 
 	public String getName() {
 		return name;
 	}
 
-	public BigDecimal getPrice() {
-		return price;
-	}
 	
 	public BigDecimal getTaxAmount(){
 		if(this.taxAmount==null){
 			// the STANRDA_DUTY_RATE% of the price Rounded to nerest 0.05
 			this.taxAmount=
 					CalculatorUtils.roundToNearest(
-							(this.getPrice().multiply(this.type.getStandardDutyRate()))
+							(this.price.multiply(this.getType().getStandardDutyRate()))
 							.divide(new BigDecimal("100")));
 			
 		}
 		return this.taxAmount;
 	}
 
-	public void setPrice(BigDecimal price) {
-		//Reset tax amount
-		this.taxAmount=null;
-		this.price=price;
-	}
-	
 }

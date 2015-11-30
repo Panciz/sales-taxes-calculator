@@ -22,36 +22,6 @@ public class ProductListParser {
 	public static final String IMPORTED_MARK = "imported"; 
 	
 	/**
-	 * Extract quantity and item name and creates the Item OB 
-	 * 
-	 * @param itemQtToken
-	 * @return
-	 * @throws ProductParserException
-	 */
-	private Item parseItemqt(String itemQtToken) throws ProductParserException{
-		Matcher m = ITEM_QUANTITY_PATTERN.matcher(itemQtToken);
-		if(m.matches()){
-			Item result = new Item(m.group(3), new BigDecimal("0.0"));
-			extractGroup(m,result,1);
-			extractGroup(m,result,2);
-			return result;
-		}else{
-			throw new ProductParserException("Error parsing  : "+itemQtToken+" not a valid item quantity line");
-		}
-	}
-	
-	private void extractGroup(Matcher matcher,Item item,int groupId){
-		if(matcher.group(groupId)!=null){
-			if(IMPORTED_MARK.equals(matcher.group(groupId).trim())){
-				item.setImported(true);
-			}else{
-				item.setPackageType(matcher.group(groupId).trim());
-			}
-		}
-	}
-	
-	
-	/**
 	 * Parse a line and extract the Item quantity,name,package type and imported flag
 	 * 
 	 * 
@@ -75,20 +45,61 @@ public class ProductListParser {
 		}else{
 			itemQtToken=split[0];
 		}
-		Item item = parseItemqt(itemQtToken);
-		
+		BigDecimal price = parsePrice(priceToken);
+		Matcher m = ITEM_QUANTITY_PATTERN.matcher(itemQtToken);
+		if(m.matches()){
+			boolean imported=extractimported(m);
+			String packageType = extractPackageType(m);
+			String name=m.group(3).trim();
+			Item result = new Item(name, price,packageType,imported);
+			return result;
+		}else{
+			throw new ProductParserException("Error parsing  : "+itemQtToken+" not a valid item quantity line");
+		}
+	}
+	
+	private BigDecimal parsePrice(String priceToken) throws ProductParserException{
 		if(priceToken!=null){
 			try{
 				BigDecimal price = new  BigDecimal(priceToken.trim());
 				price=price.setScale(2, RoundingMode.HALF_UP);
-				item.setPrice(price);
+				return price;
 			}catch(NumberFormatException ne){
 				throw new ProductParserException("Error parsing prive : "+priceToken+" not a valid price");
 			}
 		}
-		return item;
-		
+		return new BigDecimal("0.0");
 	}
+	
+	private boolean extractimported(Matcher matcher){
+		if(matcher.group(1)!=null){
+			if(IMPORTED_MARK.equals(matcher.group(1).trim())){
+				return true;
+			}
+		}
+		if(matcher.group(2)!=null){
+			if(IMPORTED_MARK.equals(matcher.group(2).trim())){
+				return true;
+			}
+		}
+		return false;
+	}
+	private String extractPackageType(Matcher matcher){
+		if(matcher.group(1)!=null){
+			if(!IMPORTED_MARK.equals(matcher.group(1).trim())){
+				return matcher.group(1).trim();
+			}
+		}
+		if(matcher.group(2)!=null){
+			if(!IMPORTED_MARK.equals(matcher.group(2).trim())){
+				return matcher.group(2).trim();
+			}
+		}
+		return "";
+	}
+	
+	
+
 
 
 
