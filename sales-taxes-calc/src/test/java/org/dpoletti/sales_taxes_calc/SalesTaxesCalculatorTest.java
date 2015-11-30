@@ -5,7 +5,6 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.math.BigDecimal;
-import java.util.List;
 
 import org.dpoletti.sales_taxes_calc.catalog.FileProductCatalog;
 import org.dpoletti.sales_taxes_calc.catalog.SalesTaxesCalculator;
@@ -21,7 +20,6 @@ import org.junit.Test;
 public class SalesTaxesCalculatorTest{
 	
 	public final static String CATALOG_FILE_NAME="src/test/resources/catalog.properties";
-	public final static String TEST_FILE = "src/test/resources/test_input/testFile1.txt";
 	public static FileProductCatalog catalog = new FileProductCatalog(CATALOG_FILE_NAME);
 	public static ProductListParser parser= new ProductListParser();
 	
@@ -84,34 +82,15 @@ public class SalesTaxesCalculatorTest{
 	
 	@Test
 	public void testFileCatalog(){
-		Item unknownItem = new Item("spaceShuttle",new BigDecimal("1000000000000"),"",false,1);
-		Assert.assertEquals("Error getting item type",ItemType.OTHER,catalog.getItemType(unknownItem));
-		Item book = new Item("book",new BigDecimal("10.12"),"",false,1);
-		Assert.assertEquals("Error getting item type",ItemType.BOOK,catalog.getItemType(book));
-		Item pills = new Item("headache pills",new BigDecimal("10.12"),"",false,1);
-		Assert.assertEquals("Error getting item type",ItemType.MEDICAL_PRODUCT,catalog.getItemType(pills));
-		Item packetCocholate = new Item("chocolate bar",new BigDecimal("10.12"),"",false,1);
-		Assert.assertEquals("Error getting item type",ItemType.FOOD,catalog.getItemType(packetCocholate));
+		Assert.assertEquals("Error getting item type",ItemType.OTHER,catalog.getItemType("spaceShuttle"));
+		Assert.assertEquals("Error getting item type",ItemType.BOOK,catalog.getItemType("book"));
+		Assert.assertEquals("Error getting item type",ItemType.MEDICAL_PRODUCT,catalog.getItemType("headache pills"));
+		Assert.assertEquals("Error getting item type",ItemType.FOOD,catalog.getItemType("chocolate bar"));
 	}
 	
-	private static void compareInputWithOutput(String fileName) throws IOException
-	{
-	    File fileInput = new File(fileName+"_input.txt");
-	    File fileOutput = new File(fileName+"_output.txt");
-	   try( BufferedReader brInput = new BufferedReader(new FileReader(fileInput));
-			   BufferedReader brOutput = new BufferedReader(new FileReader(fileOutput));
-			   ){
-	    String lineInput;
-	    String lineOutPut;
-	    int i = 0;
-	    while((lineInput = brInput.readLine()) != null && (lineOutPut = brInput.readLine()) != null){
-//			Assert.assertEquals("Error on line "+1,ItemType.BOOK,catalog.getItemType(book));
-			i++;
-	    }
-	   }catch(IOException ie){
-		   System.err.println("Error reading test file ");
-	   }
-	}
+	
+	
+	
 	
 	
 }

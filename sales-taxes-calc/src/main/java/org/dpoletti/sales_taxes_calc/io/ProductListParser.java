@@ -51,7 +51,7 @@ public class ProductListParser {
 			boolean imported=extractimported(m);
 			String packageType = extractPackageType(m);
 			String name=m.group(3).trim();
-			Item result = new Item(name, price,packageType,imported);
+			Item result = new Item(name, price,packageType,imported,1);
 			return result;
 		}else{
 			throw new ProductParserException("Error parsing  : "+itemQtToken+" not a valid item quantity line");

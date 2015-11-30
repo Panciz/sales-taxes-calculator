@@ -46,14 +46,14 @@ public class FileProductCatalog implements ProductCatalog {
 	
 	
 	@Override
-	public ItemType getItemType(Item item)
+	public ItemType getItemType(String itemName)
 	{
 		if(this.catalogFile==null){
 			throw new RuntimeException("File Catalog must be initialezed");
 		}
-		if(item.getName()==null)
+		if(itemName==null)
 			return ItemType.fromString(ItemType.OTHER.toString());
-		String type = catalogFile.getProperty(item.getName().toLowerCase(),ItemType.OTHER.toString());
+		String type = catalogFile.getProperty(itemName.toLowerCase(),ItemType.OTHER.toString());
 		return ItemType.fromString(type);
 	}
 

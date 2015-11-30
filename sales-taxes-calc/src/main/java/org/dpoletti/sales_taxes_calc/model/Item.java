@@ -1,17 +1,24 @@
 package org.dpoletti.sales_taxes_calc.model;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 
 import org.dpoletti.sales_taxes_calc.catalog.SalesTaxesCalculator;
+import org.dpoletti.sales_taxes_calc.io.ProductListParser;
 import org.dpoletti.sales_taxes_calc.utils.CalculatorUtils;
 
 public class Item {
 
-
+	private static final String ITEM_OUTPUT_PATTERN = "%d%s%s %s: %s";
+	
 	@Override
 	public String toString() {
-		return null;
+		return String.format(ITEM_OUTPUT_PATTERN, this.getQuantity(),this.isImported()?" "+ProductListParser.IMPORTED_MARK:"",
+				this.getPackageType().trim().length()>0?" "+this.getPackageType():"",this.getName(),this.getTotal().toString());
 	}
+
+
+
 	private String name;
 	private BigDecimal price;
 	private String packageType= "";
@@ -23,7 +30,10 @@ public class Item {
 	public boolean isImported() {
 		return imported;
 	}
-
+	public int getQuantity() {
+		return quantity;
+	}
+	
 
 	public BigDecimal getPrice() {
 		return price;
@@ -47,7 +57,7 @@ public class Item {
 
 	public ItemType getType() {
 		if(this.type==null){
-			this.type=SalesTaxesCalculator.productCatalog.getItemType(this);
+			this.type=SalesTaxesCalculator.productCatalog.getItemType(this.getName());
 		}
 		return type;
 	}
@@ -56,6 +66,10 @@ public class Item {
 		return name;
 	}
 
+	
+	public BigDecimal getTotal(){
+		return this.price.add(getTaxAmount()).setScale(2, RoundingMode.HALF_UP);
+	}
 	
 	public BigDecimal getTaxAmount(){
 		if(this.taxAmount==null){
