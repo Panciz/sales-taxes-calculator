@@ -18,6 +18,7 @@ public class Item {
 	private boolean imported = false;
 	private BigDecimal taxAmount = null;
 	private ItemType type;
+	private int quantity=0;
 
 	public boolean isImported() {
 		return imported;
@@ -34,12 +35,13 @@ public class Item {
 	}
 
 
-	public Item(String name, BigDecimal price,String packageType,boolean imported) {
+	public Item(String name, BigDecimal price,String packageType,boolean imported,int quantity) {
 		super();
 		this.name = name;
 		this.price = price;
 		this.packageType = packageType;
 		this.imported=imported;
+		this.quantity=quantity;
 	}
 
 
