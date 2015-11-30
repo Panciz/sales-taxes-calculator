@@ -52,11 +52,12 @@ public class SalesTaxesCalculatorTest{
 		Item normalTax = new Item("music CD",new BigDecimal("14.99"),"",false);
 		Assert.assertEquals("Error calculating taxes for "+normalTax,new BigDecimal("1.50"),normalTax.getTaxAmount() );
 		Item normalTax2 = new Item("perfume",new BigDecimal("18.99"),"",false);
-		Assert.assertEquals("Error calculating taxes for "+normalTax2,new BigDecimal("20.89"),normalTax2.getTaxAmount() );
+		Assert.assertEquals("Error calculating taxes for "+normalTax2,new BigDecimal("1.90"),normalTax2.getTaxAmount() );
 		Item onlyImportDuty= new Item("book",new BigDecimal("10.00"),"",true);
-		Assert.assertEquals("Error calculating taxes for "+onlyImportDuty,new BigDecimal("12.00"),onlyImportDuty.getTaxAmount() );
+		Assert.assertEquals("Error calculating taxes for "+onlyImportDuty,new BigDecimal("1.00"),onlyImportDuty.getTaxAmount() );
 		
-
+		Item onlyImportDuty2= new Item("book",new BigDecimal("20.10"),"",true);
+		Assert.assertEquals("Error calculating taxes for "+onlyImportDuty2,new BigDecimal("2.50"),onlyImportDuty2.getTaxAmount() );
 		
 
 
