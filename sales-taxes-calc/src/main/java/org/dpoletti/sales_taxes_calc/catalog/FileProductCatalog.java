@@ -6,7 +6,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
 
-import org.dpoletti.sales_taxes_calc.io.ProductListParser;
 import org.dpoletti.sales_taxes_calc.model.Item;
 import org.dpoletti.sales_taxes_calc.model.ItemType;
 

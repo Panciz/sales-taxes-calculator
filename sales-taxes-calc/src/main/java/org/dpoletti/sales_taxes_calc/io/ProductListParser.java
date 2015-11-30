@@ -15,7 +15,7 @@ import org.dpoletti.sales_taxes_calc.model.Item;
  */
 public class ProductListParser { 
 	
-	public static final Pattern ITEM_QUANTITY_PATTERN =  
+	public static final Pattern ITEM_QUANTITY_PATTERN = 
 			//<quantity> [imported] [packageType] <productName>
 			Pattern.compile("[0-9]+\\s+(imported\\s+|[\\S]+\\s+of\\s+)?(imported\\s+|[\\S]+\\s+of\\s+)?(\\S.+)");
 	public static final String ITEM_PRICE_SEPARATOR = " at ";
@@ -52,7 +52,7 @@ public class ProductListParser {
 	
 	
 	/**
-	 * Parse a line and extract the Item quantity,name 
+	 * Parse a line and extract the Item quantity,name,package type and imported flag
 	 * 
 	 * 
 	 * @param line
