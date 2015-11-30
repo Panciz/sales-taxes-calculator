@@ -5,6 +5,7 @@ import java.math.BigDecimal;
 import org.dpoletti.sales_taxes_calc.catalog.FileProductCatalog;
 import org.dpoletti.sales_taxes_calc.catalog.SalesTaxesCalculator;
 import org.dpoletti.sales_taxes_calc.io.ProductListParser;
+import org.dpoletti.sales_taxes_calc.io.ProductParserException;
 import org.dpoletti.sales_taxes_calc.model.Item;
 import org.dpoletti.sales_taxes_calc.model.ItemType;
 import org.dpoletti.sales_taxes_calc.utils.CalculatorUtils;
@@ -45,11 +46,19 @@ public class SalesTaxesCalculatorTest{
 	}
 	
 	@Test
-	public void calculateTaxes(){
+	public void calculateTaxes() throws ProductParserException{
 		Item noTaxItem = new Item("book",new BigDecimal("12.49"),"",false);
 		Assert.assertEquals("Error calculating taxes for "+noTaxItem,new BigDecimal("0.00"),noTaxItem.getTaxAmount() );
-		Item nomalTax = new Item("music CD",new BigDecimal("14.99"),"",false);
-		Assert.assertEquals("Error calculating taxes for "+nomalTax,new BigDecimal("1.50"),nomalTax.getTaxAmount() );
+		Item normalTax = new Item("music CD",new BigDecimal("14.99"),"",false);
+		Assert.assertEquals("Error calculating taxes for "+normalTax,new BigDecimal("1.50"),normalTax.getTaxAmount() );
+		Item normalTax2 = new Item("perfume",new BigDecimal("18.99"),"",false);
+		Assert.assertEquals("Error calculating taxes for "+normalTax2,new BigDecimal("20.89"),normalTax2.getTaxAmount() );
+		Item onlyImportDuty= new Item("book",new BigDecimal("10.00"),"",true);
+		Assert.assertEquals("Error calculating taxes for "+onlyImportDuty,new BigDecimal("12.00"),onlyImportDuty.getTaxAmount() );
+		
+
+		
+
 
 	}
 	@Test
