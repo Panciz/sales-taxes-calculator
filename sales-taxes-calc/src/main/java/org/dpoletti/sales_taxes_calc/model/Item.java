@@ -13,7 +13,7 @@ public class Item {
 	private BigDecimal price;
 	private String packageType= "";
 	private boolean imported = false;
-	
+	private BigDecimal taxAmount = null;
 
 	public boolean isImported() {
 		return imported;
@@ -37,9 +37,6 @@ public class Item {
 		this.price = price;
 	}
 
-	public void setPrice(BigDecimal price) {
-		this.price = price;
-	}
 
 	public String getName() {
 		return name;
@@ -50,8 +47,16 @@ public class Item {
 	}
 	
 	public BigDecimal getTaxAmount(){
+		if(this.taxAmount==null){
+			
+		}
 		return new BigDecimal("0");
-		
+	}
+
+	public void setPrice(BigDecimal price) {
+		//Reset tax amount
+		this.taxAmount=null;
+		this.price=price;
 	}
 	
 }

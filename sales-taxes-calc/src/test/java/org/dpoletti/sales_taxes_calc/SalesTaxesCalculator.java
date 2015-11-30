@@ -22,7 +22,7 @@ public class SalesTaxesCalculator{
 		catalog.initialize();
 	}
 	
-
+	
 	
 	
 	@Test
@@ -63,14 +63,12 @@ public class SalesTaxesCalculator{
 	@Test
 	public void testFileCatalog(){
 		Item unknownItem = new Item("spaceShuttle",new BigDecimal("1000000000000"));
-		Assert.assertEquals("Error getting item type",ItemType.UNKNOWN,catalog.getItemType(unknownItem));
+		Assert.assertEquals("Error getting item type",ItemType.OTHER,catalog.getItemType(unknownItem));
 		Item book = new Item("book",new BigDecimal("10.12"));
 		Assert.assertEquals("Error getting item type",ItemType.BOOK,catalog.getItemType(book));
 		Item pills = new Item("headache pills",new BigDecimal("10.12"));
 		Assert.assertEquals("Error getting item type",ItemType.MEDICAL_PRODUCT,catalog.getItemType(pills));
-		Item boxPills = new Item("box of headache pills",new BigDecimal("10.12"));
-		Assert.assertEquals("Error getting item type",ItemType.MEDICAL_PRODUCT,catalog.getItemType(boxPills));
-		Item packetCocholate = new Item("packet of chocolate bar",new BigDecimal("10.12"));
+		Item packetCocholate = new Item("chocolate bar",new BigDecimal("10.12"));
 		Assert.assertEquals("Error getting item type",ItemType.FOOD,catalog.getItemType(packetCocholate));
 	}
 	

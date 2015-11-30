@@ -1,30 +1,35 @@
 package org.dpoletti.sales_taxes_calc.model;
 
+import java.math.BigDecimal;
+
 public enum ItemType {
+	
 
-	FOOD("F"), MEDICAL_PRODUCT("M"), BOOK("B"), UNKNOWN("X");
+	FOOD(new BigDecimal("0").setScale(2)), 
+	MEDICAL_PRODUCT(new BigDecimal("0").setScale(2)),
+	BOOK(new BigDecimal("0").setScale(2)),
+	OTHER(new BigDecimal("10.00").setScale(2));
 
-	private ItemType(String value) {
-		this.value = value;
+	public static final BigDecimal IMPORTED_DURY_RATE=new BigDecimal("5.00").setScale(2);
+
+	private ItemType(BigDecimal value) {
+		this.standardDutyRate = value;
 	}
 
-	private final String value;
+	private final BigDecimal standardDutyRate;
 
-	public String getValue() {
-		return value;
+	public BigDecimal getStandardDutyRate() {
+		return standardDutyRate;
 	}
 
-	public static ItemType fromString(String value) {
-		switch (value) {
-		case "F":
-			return ItemType.FOOD;
-		case "M":
-			return ItemType.MEDICAL_PRODUCT;
-		case "B":
-			return ItemType.BOOK;
-		default:
-			return ItemType.UNKNOWN;
+	public static ItemType fromString(String itemTypeStr){
+		try{
+			return ItemType.valueOf(itemTypeStr);
+		}catch(Throwable e){
+			return ItemType.OTHER;
 		}
 	}
+
+	
 
 }

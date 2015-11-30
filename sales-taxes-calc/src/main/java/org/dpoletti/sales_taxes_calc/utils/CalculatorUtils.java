@@ -3,8 +3,12 @@ package org.dpoletti.sales_taxes_calc.utils;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 
+import org.dpoletti.sales_taxes_calc.model.Item;
+
 public class CalculatorUtils {
 	
+	public static final BigDecimal standardDutyRate = new BigDecimal("10").setScale(2);
+	public static final BigDecimal importDutyRate = new BigDecimal("10").setScale(2);
 	
 	public static BigDecimal roundToNearest(BigDecimal bd) {
 		if(bd==null){
@@ -17,4 +21,6 @@ public class CalculatorUtils {
 		BigDecimal result = ((bd.multiply(divisor)).setScale(0,RoundingMode.UP)).divide(divisor);
 	    return result.setScale(2,RoundingMode.HALF_UP);
 	}
+	
+	
 }

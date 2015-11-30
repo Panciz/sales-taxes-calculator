@@ -52,8 +52,8 @@ public class FileProductCatalog implements ProductCatalog {
 			throw new RuntimeException("File Catalog must be initialezed");
 		}
 		if(item.getName()==null)
-			return ItemType.UNKNOWN;
-		String type = catalogFile.getProperty(item.getName().toLowerCase(),ItemType.UNKNOWN.getValue());
+			return ItemType.fromString(ItemType.OTHER.toString());
+		String type = catalogFile.getProperty(item.getName().toLowerCase(),ItemType.OTHER.toString());
 		return ItemType.fromString(type);
 	}
 
