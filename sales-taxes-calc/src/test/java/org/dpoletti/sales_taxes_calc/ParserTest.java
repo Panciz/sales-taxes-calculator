@@ -98,7 +98,7 @@ public class ParserTest {
 	
 	@Test
 	public void compareList() throws IOException{
-		for(int i=1;i<=3;i++){
+		for(int i=1;i<=4;i++){
 			Assert.assertTrue("Error readint test input files "+TEST_LIST_FILE+i,testList(TEST_LIST_FILE+i)>0);
 		}
 	
