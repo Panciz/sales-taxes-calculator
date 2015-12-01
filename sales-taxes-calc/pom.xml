@@ -4,7 +4,7 @@
 
 	<groupId>org.dpoletti</groupId>
 	<artifactId>sales-taxes-calc</artifactId>
-	<version>0.1</version>
+	<version>1.0</version>
 	<packaging>jar</packaging>
 
 	<name>sales-taxes-calc</name>

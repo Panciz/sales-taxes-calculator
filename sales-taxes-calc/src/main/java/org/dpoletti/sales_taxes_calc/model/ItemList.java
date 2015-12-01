@@ -1,11 +1,9 @@
-package org.dpoletti.sales_taxes_calc;
+package org.dpoletti.sales_taxes_calc.model;
 
 import java.io.PrintStream;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
-
-import org.dpoletti.sales_taxes_calc.model.Item;
 
 public class ItemList {
 

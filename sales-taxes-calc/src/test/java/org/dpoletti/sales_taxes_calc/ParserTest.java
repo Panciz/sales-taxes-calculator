@@ -12,6 +12,7 @@ import org.dpoletti.sales_taxes_calc.catalog.SalesTaxesCalculator;
 import org.dpoletti.sales_taxes_calc.io.ProductListParser;
 import org.dpoletti.sales_taxes_calc.io.ProductParserException;
 import org.dpoletti.sales_taxes_calc.model.Item;
+import org.dpoletti.sales_taxes_calc.model.ItemList;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;

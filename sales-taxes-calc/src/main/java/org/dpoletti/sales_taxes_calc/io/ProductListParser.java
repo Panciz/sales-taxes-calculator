@@ -9,8 +9,8 @@ import java.math.RoundingMode;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import org.dpoletti.sales_taxes_calc.ItemList;
 import org.dpoletti.sales_taxes_calc.model.Item;
+import org.dpoletti.sales_taxes_calc.model.ItemList;
 
 /**
  * Item List Parser
