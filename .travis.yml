@@ -6,4 +6,4 @@ jdk:
   - openjdk7
 env:
   - APP_DIR=sales-taxes-calc
-script: cd $APP_DIR && mvn test
+script: cd $APP_DIR && mvn clean test
