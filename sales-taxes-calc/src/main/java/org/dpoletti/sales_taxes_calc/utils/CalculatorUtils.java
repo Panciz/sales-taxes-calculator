@@ -3,8 +3,6 @@ package org.dpoletti.sales_taxes_calc.utils;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 
-import org.dpoletti.sales_taxes_calc.model.Item;
-
 public class CalculatorUtils {
 	
 	public static final BigDecimal standardDutyRate = new BigDecimal("10").setScale(2);
