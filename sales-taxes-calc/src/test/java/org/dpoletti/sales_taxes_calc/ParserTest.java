@@ -103,8 +103,10 @@ public class ParserTest {
 	
 	}
 	
-	private static int testList(String fileName) throws IOException
+	private  int testList(String fileName) throws IOException
 	{
+	    System.out.println("------------------------List Generated from "+fileName+"_input.txt------------------------");
+
 	    File listOutputExpeted = new File(fileName+"_output.txt");
 	    File listInput = new File(fileName+"_input.txt");
 	    ItemList itemList =parser.parseList(listInput);
@@ -124,9 +126,11 @@ public class ParserTest {
 	    String lineOutPut;
 	    int i = 0;
 	    while((lineInput = brExp.readLine()) != null && (lineOutPut = brOutput.readLine()) != null){
-			Assert.assertEquals("Error on line "+i,lineOutPut,parser.parseLine(lineInput).toString());
+			Assert.assertEquals("Error on line "+i,lineOutPut,lineInput);
 			i++;
 	    }
+	    itemList.printList(System.out);
+	    System.out.println("-------------------------------------------------------------------------------------------");
 	    return i;
 	   }catch(IOException ie){
 		   
