@@ -1,9 +1,5 @@
 package org.dpoletti.sales_taxes_calc;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
-import java.io.IOException;
 import java.math.BigDecimal;
 
 import org.dpoletti.sales_taxes_calc.catalog.FileProductCatalog;
