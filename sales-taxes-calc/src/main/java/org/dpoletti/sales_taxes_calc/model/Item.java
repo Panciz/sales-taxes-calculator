@@ -74,7 +74,8 @@ public class Item {
 
 	
 	public BigDecimal getTotal(){
-		return this.price.add(getTaxAmount()).setScale(2, RoundingMode.HALF_UP);
+		return (this.price.add(getTaxAmount()).setScale(2, RoundingMode.HALF_UP))
+				.multiply(new BigDecimal(""+quantity)).setScale(2, RoundingMode.HALF_UP);
 	}
 	
 	/**

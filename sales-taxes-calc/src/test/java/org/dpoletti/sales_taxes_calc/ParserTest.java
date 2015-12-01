@@ -127,7 +127,7 @@ public class ParserTest {
 	    String lineOutPut;
 	    int i = 0;
 	    while((lineInput = brExp.readLine()) != null && (lineOutPut = brOutput.readLine()) != null){
-			Assert.assertEquals("Error on line "+i,lineOutPut,lineInput);
+			Assert.assertEquals("Error on line "+i,lineInput,lineOutPut);
 			i++;
 	    }
 	    itemList.printList(System.out);

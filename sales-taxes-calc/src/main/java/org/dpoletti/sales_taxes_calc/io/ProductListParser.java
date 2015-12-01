@@ -22,7 +22,7 @@ public class ProductListParser {
 	
 	public static final Pattern ITEM_QUANTITY_PATTERN = 
 			//<quantity> [imported] [packageType] <productName>
-			Pattern.compile("[0-9]+\\s+(imported\\s+|[\\S]+\\s+of\\s+)?(imported\\s+|[\\S]+\\s+of\\s+)?(\\S.+)");
+			Pattern.compile("([0-9])+\\s+(imported\\s+|[\\S]+\\s+of\\s+)?(imported\\s+|[\\S]+\\s+of\\s+)?(\\S.+)");
 	public static final String ITEM_PRICE_SEPARATOR = " at ";
 	public static final String IMPORTED_MARK = "imported"; 
 	
@@ -54,12 +54,19 @@ public class ProductListParser {
 		Matcher m = ITEM_QUANTITY_PATTERN.matcher(itemQtToken);
 		if(m.matches()){
 			boolean imported=extractimported(m);
+			Integer quantiy=0;
+			try{
+				quantiy = Integer.valueOf(m.group(1));
+			}catch(NumberFormatException ne){
+				throw new ProductParserException("Error parsing  : "+itemQtToken+" not a valid  quantity ");
+			}
 			String packageType = extractPackageType(m);
-			String name=m.group(3).trim();
-			Item result = new Item(name, price,packageType,imported,1);
+
+			String name=m.group(4).trim();
+			Item result = new Item(name, price,packageType,imported,quantiy);
 			return result;
 		}else{
-			throw new ProductParserException("Error parsing  : "+itemQtToken+" not a valid item quantity line");
+			throw new ProductParserException("Error parsing  : "+itemQtToken+" not a valid item  line");
 		}
 	}
 	
@@ -83,13 +90,13 @@ public class ProductListParser {
 	 * @return
 	 */
 	private boolean extractimported(Matcher matcher){
-		if(matcher.group(1)!=null){
-			if(IMPORTED_MARK.equals(matcher.group(1).trim())){
+		if(matcher.group(2)!=null){
+			if(IMPORTED_MARK.equals(matcher.group(2).trim())){
 				return true;
 			}
 		}
-		if(matcher.group(2)!=null){
-			if(IMPORTED_MARK.equals(matcher.group(2).trim())){
+		if(matcher.group(3)!=null){
+			if(IMPORTED_MARK.equals(matcher.group(3).trim())){
 				return true;
 			}
 		}
@@ -103,14 +110,14 @@ public class ProductListParser {
 	 * @return
 	 */
 	private String extractPackageType(Matcher matcher){
-		if(matcher.group(1)!=null){
-			if(!IMPORTED_MARK.equals(matcher.group(1).trim())){
-				return matcher.group(1).trim();
-			}
-		}
 		if(matcher.group(2)!=null){
 			if(!IMPORTED_MARK.equals(matcher.group(2).trim())){
 				return matcher.group(2).trim();
+			}
+		}
+		if(matcher.group(3)!=null){
+			if(!IMPORTED_MARK.equals(matcher.group(3).trim())){
+				return matcher.group(3).trim();
 			}
 		}
 		return "";
