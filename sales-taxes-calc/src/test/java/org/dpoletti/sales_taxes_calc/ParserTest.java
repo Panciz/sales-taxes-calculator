@@ -4,7 +4,7 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
-import java.io.PrintWriter;
+import java.io.PrintStream;
 import java.math.BigDecimal;
 
 import org.dpoletti.sales_taxes_calc.catalog.FileProductCatalog;
@@ -107,12 +107,11 @@ public class ParserTest {
 	{
 	    File listOutputExpeted = new File(fileName+"_output.txt");
 	    File listInput = new File(fileName+"_input.txt");
-	    ItemList itemList = new ItemList();
-	    itemList.load(listInput);
+	    ItemList itemList =parser.parseList(listInput);
 	    
 	    File testOutput=File.createTempFile("SalesTaxesCal_test",".out");
-	    try( PrintWriter out = new PrintWriter(testOutput)){
-	    	out.print(itemList.toString());
+	    try( PrintStream out = new PrintStream(testOutput)){
+	    	itemList.printList(out);
 	    }catch(IOException ie){
 			   System.err.println("Error printing Output "+ie);
 			   return -1;
