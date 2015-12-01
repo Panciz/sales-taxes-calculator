@@ -25,12 +25,10 @@ public class ParserTest {
 	public final static String TEST_LIST_FILE = "src/test/resources/io_files/testListFile";
 
 	public final static String CATALOG_FILE_NAME="src/test/resources/catalog.properties";
-	public static FileProductCatalog catalog = new FileProductCatalog(CATALOG_FILE_NAME);
 	
 	@BeforeClass
 	public static void initCatalgo() throws Exception{
-		catalog.initialize();
-		SalesTaxesCalculator.productCatalog=catalog;
+		SalesTaxesCalculator.productCatalog= new FileProductCatalog(CATALOG_FILE_NAME);
 	}
 	
 	

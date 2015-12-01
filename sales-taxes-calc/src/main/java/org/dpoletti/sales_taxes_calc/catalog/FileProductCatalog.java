@@ -21,13 +21,11 @@ public class FileProductCatalog implements ProductCatalog {
 	private Properties catalogFile;
 	private String fileName;
 	
-	public FileProductCatalog(String fileName) {
+	public FileProductCatalog(String fileName) throws Exception {
 		this.fileName=fileName;
-	}
-	
-	public void initialize() throws Exception{
 		this.loadFile();
 	}
+	
 	
 	private void loadFile() throws Exception{
 		File file=new File(fileName);

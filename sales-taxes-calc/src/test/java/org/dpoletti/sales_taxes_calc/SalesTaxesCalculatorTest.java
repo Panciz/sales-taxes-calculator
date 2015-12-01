@@ -16,13 +16,11 @@ import org.junit.Test;
 public class SalesTaxesCalculatorTest{
 	
 	public final static String CATALOG_FILE_NAME="src/test/resources/catalog.properties";
-	public static FileProductCatalog catalog = new FileProductCatalog(CATALOG_FILE_NAME);
 	public static ProductListParser parser= new ProductListParser();
 	
 	@BeforeClass
 	public static void initCatalgo() throws Exception{
-		catalog.initialize();
-		SalesTaxesCalculator.productCatalog=catalog;
+		SalesTaxesCalculator.productCatalog=new FileProductCatalog(CATALOG_FILE_NAME);
 	}
 	
 	
@@ -78,10 +76,10 @@ public class SalesTaxesCalculatorTest{
 	
 	@Test
 	public void testFileCatalog(){
-		Assert.assertEquals("Error getting item type",ItemType.OTHER,catalog.getItemType("spaceShuttle"));
-		Assert.assertEquals("Error getting item type",ItemType.BOOK,catalog.getItemType("book"));
-		Assert.assertEquals("Error getting item type",ItemType.MEDICAL_PRODUCT,catalog.getItemType("headache pills"));
-		Assert.assertEquals("Error getting item type",ItemType.FOOD,catalog.getItemType("chocolate bar"));
+		Assert.assertEquals("Error getting item type",ItemType.OTHER,SalesTaxesCalculator.productCatalog.getItemType("spaceShuttle"));
+		Assert.assertEquals("Error getting item type",ItemType.BOOK,SalesTaxesCalculator.productCatalog.getItemType("book"));
+		Assert.assertEquals("Error getting item type",ItemType.MEDICAL_PRODUCT,SalesTaxesCalculator.productCatalog.getItemType("headache pills"));
+		Assert.assertEquals("Error getting item type",ItemType.FOOD,SalesTaxesCalculator.productCatalog.getItemType("chocolate bar"));
 	}
 	
 	
