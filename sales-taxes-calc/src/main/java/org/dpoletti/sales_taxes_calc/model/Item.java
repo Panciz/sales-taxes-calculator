@@ -55,6 +55,12 @@ public class Item {
 	}
 
 
+	
+	/**
+	 * Get the type by item name usign the catalog
+	 * 
+	 * @return
+	 */
 	public ItemType getType() {
 		if(this.type==null){
 			this.type=SalesTaxesCalculator.productCatalog.getItemType(this.getName());
@@ -71,6 +77,11 @@ public class Item {
 		return this.price.add(getTaxAmount()).setScale(2, RoundingMode.HALF_UP);
 	}
 	
+	/**
+	 * The taxes are lazily Calculated
+	 * 
+	 * @return
+	 */
 	public BigDecimal getTaxAmount(){
 		if(this.taxAmount==null){
 			// the STANRDA_DUTY_RATE% of the price Rounded to nerest 0.05

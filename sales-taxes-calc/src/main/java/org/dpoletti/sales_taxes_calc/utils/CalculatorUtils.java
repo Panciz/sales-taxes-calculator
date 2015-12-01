@@ -5,8 +5,6 @@ import java.math.RoundingMode;
 
 public class CalculatorUtils {
 	
-	public static final BigDecimal standardDutyRate = new BigDecimal("10").setScale(2);
-	public static final BigDecimal importDutyRate = new BigDecimal("10").setScale(2);
 	
 	public static BigDecimal roundToNearest(BigDecimal bd) {
 		if(bd==null){

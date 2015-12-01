@@ -76,6 +76,12 @@ public class ProductListParser {
 		return new BigDecimal("0.0");
 	}
 	
+	/**
+	 * Check the presence of imported mark
+	 * 
+	 * @param matcher
+	 * @return
+	 */
 	private boolean extractimported(Matcher matcher){
 		if(matcher.group(1)!=null){
 			if(IMPORTED_MARK.equals(matcher.group(1).trim())){
@@ -89,6 +95,13 @@ public class ProductListParser {
 		}
 		return false;
 	}
+	
+	/**
+	 * Extract Package Type
+	 * 
+	 * @param matcher
+	 * @return
+	 */
 	private String extractPackageType(Matcher matcher){
 		if(matcher.group(1)!=null){
 			if(!IMPORTED_MARK.equals(matcher.group(1).trim())){
@@ -103,6 +116,13 @@ public class ProductListParser {
 		return "";
 	}
 	
+	/**
+	 * Parse the list reading a file
+	 * 
+	 * 
+	 * @param listInput
+	 * @return
+	 */
 	public ItemList parseList(File listInput){
 		if(!listInput.exists() || !listInput.canRead()){
 			throw new RuntimeException("Error file "+listInput.getAbsolutePath()+" or cannot be read");
@@ -114,6 +134,10 @@ public class ProductListParser {
 		    	Item item = parseLine(lineOutPut);
 		    	result.addItem(item);
 		    }
+		 }catch(ProductParserException ie){
+			   System.err.println("Error parsing test file "+listInput.getPath()+": "+ie);
+				throw new RuntimeException(ie);
+		  
 		  }catch(IOException ie){
 			   System.err.println("Error reading test file "+listInput.getPath()+": "+ie);
 				throw new RuntimeException("Error file "+listInput.getAbsolutePath()+" or cannot be read");

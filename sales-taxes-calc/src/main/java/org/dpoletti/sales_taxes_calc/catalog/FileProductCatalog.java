@@ -10,7 +10,7 @@ import org.dpoletti.sales_taxes_calc.model.ItemType;
 
 /**
  * 
- * Simple implementation of the catalog based on properties filr
+ * Simple implementation of the catalog based on properties file
  * 
  * @author dapol
  *
